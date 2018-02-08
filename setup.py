@@ -11,22 +11,6 @@ this_dir = abspath(dirname(__file__))
 with open(join(this_dir, 'README.rst'), encoding='utf-8') as file:
     long_description = file.read()
 
-
-class RunTests(Command):
-    description = 'run tests'
-    user_options = []
-
-    def initialize_options(self):
-        pass
-
-    def finalize_options(self):
-        pass
-
-    def run(self):
-        errno = call(['py.test', '--cov=motion', '--cov-report=term-missing'])
-        raise SystemExit(errno)
-
-
 setup(
     name = 'motion',
     version = __version__,
@@ -51,15 +35,9 @@ setup(
         'Programming Language :: Python :: 3.4',
     ],
     keywords = 'ci',
-    packages = find_packages(exclude=['docs', 'tests*']),
-    install_requires = ['docopt'],
-    extras_require = {
-        'test': ['coverage', 'pytest', 'pytest-cov'],
-    },
     entry_points = {
         'console_scripts': [
             'motion=motion.cli:main',
         ],
     },
-    cmdclass = {'test': RunTests},
 )
