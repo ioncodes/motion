@@ -18,9 +18,13 @@ class Monitor:
             r = requests.get(url, headers=headers)
             t = r.text
             m = p.search(t)
+            sort = config['sort']
+            data = re.compile(config['data'])
+            f = config['format']
+            _trigger = config['trigger']
             if m:
                 trigger = m.group(1)
-                self.configs.append(Config(url, trigger, p, headers, mode))
+                self.configs.append(Config(url, trigger, p, headers, mode, data, sort, _trigger, f))
 
     def display(self):
         while True:
@@ -32,14 +36,15 @@ class Monitor:
                 x = config.validate(t)
                 mode = config.get_mode()
                 if x:
+                    msg = config.get_data(t)
                     if mode == 'success':
-                        print(colored(x, 'green'))
+                        print(colored(msg, 'green'))
                     elif mode == 'warning':
-                        print(colored(x, 'orange'))
+                        print(colored(msg, 'orange'))
                     elif mode == 'error':
-                        print(colored(x, 'red'))
+                        print(colored(msg, 'red'))
                     else:
-                        print(colored(x, 'white'))
+                        print(colored(msg, 'white'))
                 else:
                     config.set_trigger('lol') # debug
             time.sleep(1)

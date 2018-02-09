@@ -21,14 +21,14 @@ class ConfigManager:
         with open(self.config, 'w') as stream:
             json.dump(config, stream)
 
-    def add(self, name, url, regex, headers, mode):
+    def add(self, name, url, regex, headers, mode, data, data_sorting, trigger, f):
         config = self.read()
         _headers = []
         if headers:
             for header in headers.split(','):
-                data = header.split(':')
-                _headers.append({'key': data[0], 'value': data[1]})
-        config.append({'name': name, 'url': url, 'regex': regex, 'headers': _headers, 'mode': mode})
+                _data = header.split(':')
+                _headers.append({'key': _data[0], 'value': _data[1]})
+        config.append({'name': name, 'url': url, 'regex': regex, 'headers': _headers, 'mode': mode, 'data': data, 'sort': list(map(int, data_sorting.split(','))), 'trigger': trigger, 'format': f})
         self.write(config)
 
     def remove(self, name):
