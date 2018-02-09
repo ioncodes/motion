@@ -14,7 +14,7 @@ with open(join(this_dir, 'README.rst'), encoding='utf-8') as file:
 setup(
     name = 'motion',
     version = __version__,
-    description = 'Stay updated about your CI status.',
+    description = 'Stay updated',
     long_description = long_description,
     url = 'https://github.com/ioncodes/motion',
     author = 'Luca Marcelli',
@@ -34,7 +34,7 @@ setup(
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
     ],
-    keywords = 'ci',
+    keywords = '',
     entry_points = {
         'console_scripts': [
             'motion=motion.cli:main',
