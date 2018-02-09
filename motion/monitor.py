@@ -45,6 +45,4 @@ class Monitor:
                         print(colored(msg, 'red'))
                     else:
                         print(colored(msg, 'white'))
-                else:
-                    config.set_trigger('lol') # debug
-            time.sleep(1)
+            time.sleep(10)
